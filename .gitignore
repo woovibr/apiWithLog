@@ -1,0 +1,9 @@
+node_modules
+
+.env
+build
+yarn-error.log
+md
+
+
+*.json
