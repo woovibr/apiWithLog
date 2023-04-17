@@ -10,7 +10,7 @@ export const timeSpan = () => {
   };
 
   const returnValue = () => end('milliseconds');
-  returnValue.rounded = () => Math.round(end('nanoseconds'));
+  returnValue.rounded = () => Math.round(end('milliseconds'));
   returnValue.seconds = () => end('seconds');
   returnValue.nanoseconds = () => end('nanoseconds');
 
