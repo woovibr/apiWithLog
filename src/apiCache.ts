@@ -3,9 +3,10 @@ import path from 'path';
 import util from 'util';
 import writeFileAtomicCallback from 'write-file-atomic';
 
-import { debugConsole } from './debugConsole';
+import { RequestInfo, RequestInit, Response } from 'node-fetch';
 
 import { cloneResponse } from './cloneResponse';
+import { debugConsole } from './debugConsole';
 import { getCurl } from './getCurl';
 
 const readFile = util.promisify(fs.readFile);

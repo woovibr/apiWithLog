@@ -1,13 +1,18 @@
+import { RequestInfo, RequestInit, Response } from 'node-fetch';
+
 import { cloneResponse } from './cloneResponse';
 import { timeSpan } from './timeSpan';
 import { apiDebug }from './apiDebug';
 import { apiReport } from './apiReport';
 import { getRequestMock, saveRequestMock } from './apiCache';
 
+const fetch = (url: URL | RequestInfo, init?: RequestInit) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(url, init));
 
 type RequestOptions = RequestInit & {
   shouldReport?: boolean;
 };
+
 export const apiWithLog = async (
   init: RequestInfo,
   optionsApi: RequestOptions = { method: 'GET' },
@@ -33,7 +38,7 @@ export const apiWithLog = async (
 
     const text = await response.text();
 
-    let json = null;
+    let json: any = null;
 
     try {
       json = JSON.parse(text);
@@ -41,7 +46,7 @@ export const apiWithLog = async (
       // eslint-disable-next-line
     }
 
-    const getBody = () => {
+    const getBody = (): Record<string, string> => {
       if (json) {
         return {
           json,

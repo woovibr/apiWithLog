@@ -1,3 +1,5 @@
+import { Response } from "node-fetch";
+
 // This function clone the response consume your body and return the same response
 // `clone()` is broken in `node-fetch` and results in a stalled Promise
 // for responses above a certain size threshold. So construct a similar
@@ -7,6 +9,7 @@ type CloneResponse = {
   text: string;
   json: string;
 };
+
 export const cloneResponse = async (
   response: Response,
   responseText?: string | null,
@@ -21,9 +24,11 @@ export const cloneResponse = async (
     // eslint-disable-next-line
   }
 
-  const Response = fetch.Response || global.Response || response.constructor;
+  // eslint-disable-next-line
+  // @ts-ignore
+  const ResponseConstructor = fetch.Response || global.Response || response.constructor;
 
-  const responseCopy = new Response(text, {
+  const responseCopy = new ResponseConstructor(text, {
     status: response.status,
     statusText: response.statusText,
     headers: response.headers,

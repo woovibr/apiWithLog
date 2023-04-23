@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "lib": ["es2017", "es2019"],
+    "module": "esnext",
+    "types": ["node"],
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "preserveConstEnums": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "outDir": "./lib",
+    "target": "es2019",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "useUnknownInCatchVariables": false
+  },
+  "include": ["src/*", "scripts/*.ts"]
+}

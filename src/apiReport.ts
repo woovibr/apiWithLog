@@ -1,23 +1,29 @@
 import * as Sentry from '@sentry/node';
 
-import { prettyFormat } from 'pretty-format';
+import { RequestInfo, RequestInit, Response } from 'node-fetch';
+import prettyFormat from 'pretty-format';
 
 import { getCurl } from './getCurl';
 
-// implement
-const shouldReport = () => false;
-// implement
-const sendtoSlack = () => {};
+// TODO: implement
+const shouldReport = (..._: unknown[]) => false;
+// TODO: implement
+const sendtoSlack = (..._: unknown[]) => {};
+
+type RequestOptions = RequestInit & {
+  shouldReport?: boolean;
+};
 
 type ApiReport = {
   init: RequestInfo;
-  options: RequestInit;
-  durationTime: number;
+  options: RequestOptions;
+  // durationTime: number;
   getBody: () => Record<string, string>;
   response: Response;
   json: Record<string, string>;
   text: string;
 };
+
 export const apiReport = async ({
   init,
   options,

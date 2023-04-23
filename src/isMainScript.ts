@@ -7,7 +7,7 @@ const cwd = process.cwd();
 // yarn w
 // yarn b
 // yarn es
-export const isMainScript = (require, module, filename: string) => {
+export const isMainScript = (require: NodeJS.Require, module: NodeJS.Module, filename: string) => {
   // webpack_entry is the real
   if (process.env.WEBPACK_ENTRY) {
     const fullEntry = path.join(cwd, process.env.WEBPACK_ENTRY);
