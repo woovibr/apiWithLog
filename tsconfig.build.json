@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "lib": ["es2017", "es2019"],
+    "module": "esnext",
+    "types": ["node"],
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "preserveConstEnums": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationDir": "lib/types",
+    "outDir": "./lib",
+    "rootDir": "src",
+    "target": "es2019",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "useUnknownInCatchVariables": false,
+    "noEmit": false,
+    "emitDeclarationOnly": true
+  },
+  "exclude": ["scripts/*"]
+}

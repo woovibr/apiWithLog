@@ -1,8 +1,9 @@
 import chalk from 'chalk';
 
-import { debugConsole } from './debugConsole';
+import { RequestInfo, RequestInit, Response } from 'node-fetch';
 
 import { getCurl } from './getCurl';
+import { debugConsole } from './debugConsole';
 import { ignoredHeaders } from './logSecurity';
 
 type ApiDebug = {
@@ -26,14 +27,14 @@ export const apiDebug = ({
   // eslint-disable-next-line
   const { agent, headers, ...optionsWithoutAgent } = options;
 
-  const cleanHeaders = Object.keys(headers).reduce((acc, key) => {
-    if (ignoredHeaders.includes(key)) {
+  const cleanHeaders = Object.keys(headers || {}).reduce((acc, key) => {
+    if (!headers || ignoredHeaders.includes(key)) {
       return acc;
     }
-
+  
     return {
       ...acc,
-      [key]: headers[key],
+      [key]: (headers as Record<string, string>)[key],
     };
   }, {});
 

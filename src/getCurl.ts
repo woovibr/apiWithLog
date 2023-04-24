@@ -1,3 +1,5 @@
+import { Headers, Request, RequestInfo, RequestInit } from "node-fetch";
+
 // find a b
 export const ignoredHeaders = [
   'host',
@@ -16,11 +18,12 @@ export const ignoredHeaders = [
  * @param {any} options
  * @returns {string}
  */
-export const generateMethod = (options) => {
+export const generateMethod = (options: Request | RequestInit): string => {
   const method = options.method;
 
   if (!method) return '';
-  const type = {
+
+  const type: Record<string, string> = {
     GET: ' -X GET',
     POST: ' -X POST',
     PUT: ' -X PUT',
@@ -38,7 +41,7 @@ export const generateMethod = (options) => {
  * @param {any} val
  * @returns true if the envirtonment supports Headers and val is of instance Headers
  */
-export const isInstanceOfHeaders = (val) => {
+export const isInstanceOfHeaders = (val: any): val is Headers => {
   if (typeof Headers !== 'function') {
     /**
      * Environment does not support the Headers constructor
@@ -56,7 +59,7 @@ export const isInstanceOfHeaders = (val) => {
  * @property {String} params - The header params as string
  */
 
-const getHeaderString = (name, val) => {
+const getHeaderString = (name: string, val: string) => {
   if (!val) {
     return '';
   }
@@ -70,13 +73,14 @@ const getHeaderString = (name, val) => {
  * @param {object|Headers} options.headers
  * @returns {HeaderParams} An Object with the header info
  */
-export const generateHeader = (options = {}) => {
+export const generateHeader = (options = {} as any) => {
   const { headers } = options;
+  
   let isEncode = false;
   let headerParam = '';
 
   if (isInstanceOfHeaders(headers)) {
-    headers.forEach((val, name) => {
+    headers.forEach((val: string, name: string) => {
       if (ignoredHeaders.indexOf(name) === -1) {
         if (name.toLocaleLowerCase() !== 'content-length') {
           headerParam += getHeaderString(name, val);
@@ -114,10 +118,10 @@ export const generateHeader = (options = {}) => {
  * @param {Object} body
  * @returns {string}
  */
-export function generateBody(body) {
+export function generateBody(body: string | object | null | undefined): string {
   if (!body) return '';
   if (typeof body === 'object') {
-    if (body?.has) {
+    if (body.hasOwnProperty('has')) {
       return ` --data-urlencode '${body.toString()}'`;
     }
 
@@ -134,7 +138,7 @@ export function generateBody(body) {
  * @param {boolean} isEncode
  * @return {string}
  */
-export function generateCompress(isEncode) {
+export function generateCompress(isEncode: boolean): string {
   return isEncode ? ' --compressed' : '';
 }
 
@@ -145,7 +149,7 @@ export function generateCompress(isEncode) {
  * @param {string|object} requestInfo
  * @param {object={}} requestInit
  */
-export const getCurl = (requestInfo, requestInit) => {
+export const getCurl = (requestInfo: RequestInfo, requestInit: RequestInit) => {
   let url;
   let options;
 
