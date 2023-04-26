@@ -49,8 +49,10 @@ export const saveRequestMock = async (
 
     console.log(dataString);
   } catch (err) {
-    // eslint-disable-next-line
-    console.log({ err });
+    if (err && err.code !== 'ENOENT') {
+      // eslint-disable-next-line
+      console.log({ err });
+    }
   }
 
   try {
