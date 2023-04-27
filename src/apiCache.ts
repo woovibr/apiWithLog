@@ -10,11 +10,11 @@ import { debugConsole } from './debugConsole';
 import { getCurl } from './getCurl';
 
 const readFile = util.promisify(fs.readFile);
-// const writeFile = util.promisify(fs.writeFile);
+const writeFile = util.promisify(fs.writeFile);
 const writeFileAtomic = util.promisify(writeFileAtomicCallback);
+
 const cwd = process.cwd();
 const dirPath = 'mock-requests.json';
-
 const output = path.join(cwd, dirPath);
 
 export const getRequestKey = (init: RequestInfo, options: RequestInit) => {
@@ -45,9 +45,12 @@ export const saveRequestMock = async (
   let dataString = null;
 
   try {
-    dataString = await readFile(output, 'utf8');
-
-    console.log(dataString);
+    if (fs.existsSync(output)) {
+      dataString = await readFile(output, 'utf8');
+      console.log(dataString);
+    } else {
+      await writeFile(output, '');
+    }
   } catch (err) {
     // eslint-disable-next-line
     console.log({ err });
