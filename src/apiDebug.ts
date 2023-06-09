@@ -24,10 +24,10 @@ export const apiDebug = ({
   }
 
   // eslint-disable-next-line
-  const { agent, headers, ...optionsWithoutAgent } = options;
+  const { agent, headers, ...optionsWithoutAgent } = options as  {headers: Record<string, string>, agent: string};
 
-  const cleanHeaders = Object.keys(headers).reduce((acc, key) => {
-    if (ignoredHeaders.includes(key)) {
+  const cleanHeaders = Object.keys(headers || {}).reduce((acc, key) => {
+    if (ignoredHeaders.includes(key) || !headers) {
       return acc;
     }
 

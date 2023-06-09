@@ -28,7 +28,7 @@ export const saveRequestMock = async (
   init: RequestInfo,
   options: RequestInit,
   text: string,
-  response: Response,
+  response: Response & { size?: number },
 ) => {
   if (process.env.WRITE_MOCK !== 'true') {
     return;
@@ -56,7 +56,7 @@ export const saveRequestMock = async (
     const currentMock = dataString ? JSON.parse(dataString) : {};
 
     const newRequest = {
-      text,
+      text: JSON.parse(text),
       response: {
         status: response.status,
         statusText: response.statusText,
@@ -66,13 +66,12 @@ export const saveRequestMock = async (
         url: response?.url,
       },
     };
-
     const newMock = {
       ...currentMock,
       [requestKey]: newRequest,
     };
 
-    const newMockString = JSON.stringify(newMock);
+    const newMockString = JSON.stringify(newMock, null, 2);
 
     await writeFileAtomic(output, newMockString);
 
@@ -86,7 +85,7 @@ export const saveRequestMock = async (
 
 export const getRequestMock = async (
   init: RequestInfo,
-  options: RequestInit,
+  options: RequestInit & { agent?: string },
 ) => {
   if (process.env.USE_MOCK !== 'true') {
     return;

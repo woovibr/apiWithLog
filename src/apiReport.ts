@@ -1,17 +1,17 @@
 import * as Sentry from '@sentry/node';
 
-import { prettyFormat } from 'pretty-format';
+import prettyFormat from 'pretty-format';
 
 import { getCurl } from './getCurl';
 
 // implement
-const shouldReport = () => false;
+const shouldReport = (...args: unknown[]) => false;
 // implement
-const sendtoSlack = () => {};
+const sendtoSlack = (...args: unknown[]) => {};
 
 type ApiReport = {
   init: RequestInfo;
-  options: RequestInit;
+  options: RequestInit & { shouldReport?: boolean | string };
   durationTime: number;
   getBody: () => Record<string, string>;
   response: Response;

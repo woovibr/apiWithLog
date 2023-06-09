@@ -1,8 +1,8 @@
+import { getRequestMock, saveRequestMock } from './apiCache';
+import { apiDebug } from './apiDebug';
+import { apiReport } from './apiReport';
 import { cloneResponse } from './cloneResponse';
 import { timeSpan } from './timeSpan';
-import { apiDebug }from './apiDebug';
-import { apiReport } from './apiReport';
-import { getRequestMock, saveRequestMock } from './apiCache';
 
 
 type RequestOptions = RequestInit & {
@@ -33,7 +33,7 @@ export const apiWithLog = async (
 
     const text = await response.text();
 
-    let json = null;
+    let json: any = null;
 
     try {
       json = JSON.parse(text);
@@ -41,7 +41,7 @@ export const apiWithLog = async (
       // eslint-disable-next-line
     }
 
-    const getBody = () => {
+    const getBody = (): Record<string, string> => {
       if (json) {
         return {
           json,
@@ -66,6 +66,7 @@ export const apiWithLog = async (
     await apiReport({
       init,
       options,
+      durationTime,
       getBody,
       response,
       json,

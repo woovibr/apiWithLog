@@ -8,7 +8,7 @@ type CloneResponse = {
   json: string;
 };
 export const cloneResponse = async (
-  response: Response,
+  response: Response & { size?: number },
   responseText?: string | null,
 ): Promise<CloneResponse> => {
   const text = responseText ?? (await response.text());
@@ -21,6 +21,8 @@ export const cloneResponse = async (
     // eslint-disable-next-line
   }
 
+  // why "fetch.Response"?
+  // @ts-ignore
   const Response = fetch.Response || global.Response || response.constructor;
 
   const responseCopy = new Response(text, {
