@@ -1,4 +1,4 @@
-import { apiWithLog } from '../src/apiWithLog';
+import { apiWithLog } from '../src';
 
 
 const run = async () => {
