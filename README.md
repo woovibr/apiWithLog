@@ -1,4 +1,4 @@
-# Woovi apiWithLog
+# @woovi/apiWithLog
 
 Powerful `fetch` wrapper with the given functionallies:
 
