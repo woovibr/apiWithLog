@@ -2,13 +2,15 @@
   "name": "@woovi/apiwithlog",
   "version": "1.0.1",
   "dependencies": {
-    "@sentry/node": "^8.2.1",
     "chalk": "^5.3.0",
-    "isomorphic-fetch": "^3.0.0",
     "pretty-format": "^29.7.0",
     "write-file-atomic": "^5.0.1"
   },
+  "peerDependencies": {
+    "@sentry/node": "*"
+  },
   "devDependencies": {
+    "isomorphic-fetch": "^3.0.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -24,7 +26,8 @@
     "rollup-plugin-esbuild": "^6.1.1",
     "rollup-plugin-polyfill-node": "^0.13.0",
     "tslib": "^2.6.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "@sentry/node": "^8.2.1"
   },
   "exports": {
     ".": {
