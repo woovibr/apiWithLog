@@ -15,6 +15,8 @@ const cwd = process.cwd();
 const dirPath = 'mock-requests.json';
 const output = path.join(cwd, dirPath);
 
+const isDebug = ['true', 'api', '*'].includes(process.env.DEBUG);
+
 export const getRequestKey = (init: string | URL | globalThis.Request, options: RequestInit) => {
   if (!options?.body) {
     return `${options.method}:${init}`;
@@ -118,7 +120,7 @@ export const getRequestMock = async (
     // eslint-disable-next-line
     console.log('mock-cache: ', requestKey);
 
-    if (process.env.DEBUG === 'true' || process.env.DEBUG !== 'api') {
+    if (isDebug) {
       // eslint-disable-next-line
       const { agent, ...optionsWithoutAgent } = options;
 
