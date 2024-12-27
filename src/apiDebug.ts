@@ -1,13 +1,11 @@
 import chalk from 'chalk';
 
-import { type RequestInfo, type RequestInit, Response } from 'node-fetch';
-
 import { getCurl } from './getCurl.ts';
 import { debugConsole } from './debugConsole.ts';
 import { ignoredHeaders } from './logSecurity.ts';
 
 type ApiDebug = {
-  init: RequestInfo;
+  init: string | URL | globalThis.Request;
   options: RequestInit;
   durationTime: number;
   getBody: () => Record<string, string>;

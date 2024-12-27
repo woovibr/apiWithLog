@@ -1,5 +1,3 @@
-import { Response } from "node-fetch";
-
 // This function clone the response consume your body and return the same response
 // `clone()` is broken in `node-fetch` and results in a stalled Promise
 // for responses above a certain size threshold. So construct a similar

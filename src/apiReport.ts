@@ -1,6 +1,5 @@
 import * as Sentry from '@sentry/node';
 
-import { type RequestInfo, type RequestInit, Response } from 'node-fetch';
 import prettyFormat from 'pretty-format';
 
 import { getCurl } from './getCurl.ts';
@@ -15,7 +14,7 @@ type RequestOptions = RequestInit & {
 };
 
 type ApiReport = {
-  init: RequestInfo;
+  init: string | URL | globalThis.Request;
   options: RequestOptions;
   // durationTime: number;
   getBody: () => Record<string, string>;

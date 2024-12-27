@@ -1,20 +1,15 @@
-import { type RequestInfo, type RequestInit, Response } from 'node-fetch';
-
 import { cloneResponse } from './cloneResponse.ts';
 import { timeSpan } from './timeSpan.ts';
 import { apiDebug }from './apiDebug.ts';
 import { apiReport } from './apiReport.ts';
 import { getRequestMock, saveRequestMock } from './apiCache.ts';
 
-const fetch = (url: URL | RequestInfo, init?: RequestInit) =>
-  import('node-fetch').then(({ default: fetch }) => fetch(url, init));
-
 type RequestOptions = RequestInit & {
   shouldReport?: boolean;
 };
 
 export const apiWithLog = async (
-  init: RequestInfo,
+  init: string | URL | globalThis.Request,
   optionsApi: RequestOptions = { method: 'GET' },
 ): Promise<Response> => {
   const end = timeSpan();
