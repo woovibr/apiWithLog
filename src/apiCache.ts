@@ -118,7 +118,7 @@ export const getRequestMock = async (
     // eslint-disable-next-line
     console.log('mock-cache: ', requestKey);
 
-    if (process.env.DEBUG === 'true') {
+    if (process.env.DEBUG === 'true' || process.env.DEBUG !== 'api') {
       // eslint-disable-next-line
       const { agent, ...optionsWithoutAgent } = options;
 
