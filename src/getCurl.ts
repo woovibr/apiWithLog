@@ -1,5 +1,3 @@
-import { Headers, Request, type RequestInfo, type RequestInit } from "node-fetch";
-
 // find a b
 export const ignoredHeaders = [
   'host',
@@ -146,10 +144,10 @@ export function generateCompress(isEncode: boolean): string {
  *
  *
  * @export
- * @param {string|object} requestInfo
+ * @param {string|object} init
  * @param {object={}} requestInit
  */
-export const getCurl = (requestInfo: RequestInfo, requestInit: RequestInit) => {
+export const getCurl = (init: Request, requestInit: RequestInit) => {
   let url;
   let options;
 
@@ -157,12 +155,12 @@ export const getCurl = (requestInfo: RequestInfo, requestInit: RequestInit) => {
    * initialization with an empty object is done here to
    * keep everything backwards compatible to 0.4.0 and below
    */
-  if (typeof requestInfo === 'string') {
-    url = requestInfo;
+  if (typeof init === 'string') {
+    url = init;
     options = requestInit || {};
   } else {
-    url = (requestInfo || {}).url;
-    options = requestInfo || {};
+    url = (init || {}).url;
+    options = init || {};
   }
 
   const { body } = options;

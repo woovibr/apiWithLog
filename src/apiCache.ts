@@ -3,8 +3,6 @@ import path from 'path';
 import util from 'util';
 import writeFileAtomicCallback from 'write-file-atomic';
 
-import { type RequestInfo, type RequestInit, Response } from 'node-fetch';
-
 import { cloneResponse } from './cloneResponse.ts';
 import { debugConsole } from './debugConsole.ts';
 import { getCurl } from './getCurl.ts';
@@ -17,7 +15,7 @@ const cwd = process.cwd();
 const dirPath = 'mock-requests.json';
 const output = path.join(cwd, dirPath);
 
-export const getRequestKey = (init: RequestInfo, options: RequestInit) => {
+export const getRequestKey = (init: string | URL | globalThis.Request, options: RequestInit) => {
   if (!options?.body) {
     return `${options.method}:${init}`;
   }
@@ -26,7 +24,7 @@ export const getRequestKey = (init: RequestInfo, options: RequestInit) => {
 };
 
 export const saveRequestMock = async (
-  init: RequestInfo,
+  init: string | URL | globalThis.Request,
   options: RequestInit,
   text: string,
   response: Response,
@@ -89,7 +87,7 @@ export const saveRequestMock = async (
 };
 
 export const getRequestMock = async (
-  init: RequestInfo,
+  init: string | URL | globalThis.Request,
   options: RequestInit,
 ) => {
   if (process.env.USE_MOCK !== 'true') {
