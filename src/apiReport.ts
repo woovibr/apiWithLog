@@ -1,9 +1,9 @@
 import * as Sentry from '@sentry/node';
 
-import { RequestInfo, RequestInit, Response } from 'node-fetch';
+import { type RequestInfo, type RequestInit, Response } from 'node-fetch';
 import prettyFormat from 'pretty-format';
 
-import { getCurl } from './getCurl';
+import { getCurl } from './getCurl.ts';
 
 // TODO: implement
 const shouldReport = (..._: unknown[]) => false;
