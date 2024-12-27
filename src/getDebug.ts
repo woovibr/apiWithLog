@@ -1,5 +1,3 @@
-import { debugConsole } from '@woovi/graphql';
-
 /**
  * DEBUG=api,worker pnpm graphql
  * const debug = getDebug('api');
@@ -7,6 +5,8 @@ import { debugConsole } from '@woovi/graphql';
  * debug('message'); // api message
  * debug.inspect(obj); // api { obj }
  */
+import {debugConsole} from './debugConsole.ts';
+
 
 const getDebugLogs = () => {
   const logs = process.env.DEBUG?.split(',') || [];
