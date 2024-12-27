@@ -6,9 +6,6 @@
     "pretty-format": "^29.7.0",
     "write-file-atomic": "^6.0.0"
   },
-  "peerDependencies": {
-    "@sentry/node": "*"
-  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
@@ -42,6 +39,9 @@
   "license": "MIT",
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
+  "peerDependencies": {
+    "@sentry/node": "*"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -56,5 +56,6 @@
     "ts:dev": "tsc --noEmit --watch",
     "ts:export": "tsc -p tsconfig.build.json"
   },
+  "type": "module",
   "types": "lib/index.d.ts"
 }
