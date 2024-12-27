@@ -18,7 +18,7 @@ export const apiDebug = ({
   getBody,
   response,
 }: ApiDebug) => {
-  if (process.env.DEBUG !== 'true') {
+  if (process.env.DEBUG !== 'true' || process.env.DEBUG !== 'api') {
     return;
   }
 
