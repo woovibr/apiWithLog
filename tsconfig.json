@@ -16,7 +16,9 @@
     "target": "es2019",
     "sourceMap": true,
     "esModuleInterop": true,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true
   },
   "include": ["src/*", "scripts/*.ts"]
 }

@@ -1,10 +1,10 @@
-import { RequestInfo, RequestInit, Response } from 'node-fetch';
+import { type RequestInfo, type RequestInit, Response } from 'node-fetch';
 
-import { cloneResponse } from './cloneResponse';
-import { timeSpan } from './timeSpan';
-import { apiDebug }from './apiDebug';
-import { apiReport } from './apiReport';
-import { getRequestMock, saveRequestMock } from './apiCache';
+import { cloneResponse } from './cloneResponse.ts';
+import { timeSpan } from './timeSpan.ts';
+import { apiDebug }from './apiDebug.ts';
+import { apiReport } from './apiReport.ts';
+import { getRequestMock, saveRequestMock } from './apiCache.ts';
 
 const fetch = (url: URL | RequestInfo, init?: RequestInit) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url, init));

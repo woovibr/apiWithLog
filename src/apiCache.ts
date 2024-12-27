@@ -3,11 +3,11 @@ import path from 'path';
 import util from 'util';
 import writeFileAtomicCallback from 'write-file-atomic';
 
-import { RequestInfo, RequestInit, Response } from 'node-fetch';
+import { type RequestInfo, type RequestInit, Response } from 'node-fetch';
 
-import { cloneResponse } from './cloneResponse';
-import { debugConsole } from './debugConsole';
-import { getCurl } from './getCurl';
+import { cloneResponse } from './cloneResponse.ts';
+import { debugConsole } from './debugConsole.ts';
+import { getCurl } from './getCurl.ts';
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);

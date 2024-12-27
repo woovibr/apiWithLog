@@ -1,10 +1,10 @@
 import chalk from 'chalk';
 
-import { RequestInfo, RequestInit, Response } from 'node-fetch';
+import { type RequestInfo, type RequestInit, Response } from 'node-fetch';
 
-import { getCurl } from './getCurl';
-import { debugConsole } from './debugConsole';
-import { ignoredHeaders } from './logSecurity';
+import { getCurl } from './getCurl.ts';
+import { debugConsole } from './debugConsole.ts';
+import { ignoredHeaders } from './logSecurity.ts';
 
 type ApiDebug = {
   init: RequestInfo;

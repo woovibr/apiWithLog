@@ -1,4 +1,4 @@
-import { Headers, Request, RequestInfo, RequestInit } from "node-fetch";
+import { Headers, Request, type RequestInfo, type RequestInit } from "node-fetch";
 
 // find a b
 export const ignoredHeaders = [

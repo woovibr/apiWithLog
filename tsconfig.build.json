@@ -20,7 +20,9 @@
     "esModuleInterop": true,
     "useUnknownInCatchVariables": false,
     "noEmit": false,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true
   },
   "exclude": ["scripts/*"]
 }
