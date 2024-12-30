@@ -26,7 +26,9 @@ export const cloneResponse = async (
   // @ts-ignore
   const ResponseConstructor = fetch.Response || global.Response || response.constructor;
 
-  const responseCopy = new ResponseConstructor(text, {
+  const body = response.status === 204 ? null : text;
+
+  const responseCopy = new ResponseConstructor(body, {
     status: response.status,
     statusText: response.statusText,
     headers: response.headers,
