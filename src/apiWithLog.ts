@@ -2,7 +2,6 @@ import chalk from 'chalk';
 import { cloneResponse } from './cloneResponse.ts';
 import { timeSpan } from './timeSpan.ts';
 import { apiDebug }from './apiDebug.ts';
-import { apiReport } from './apiReport.ts';
 import { getRequestMock, saveRequestMock } from './apiCache.ts';
 import {createResponse} from './createResponse.ts';
 import {getCurl} from './getCurl.ts';
@@ -67,15 +66,6 @@ export const apiWithLog = async (
       durationTime,
       getBody,
       response,
-    });
-
-    await apiReport({
-      init,
-      options,
-      getBody,
-      response,
-      json,
-      text,
     });
 
     const { responseCopy } = await cloneResponse(response, text);

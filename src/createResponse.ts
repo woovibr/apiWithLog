@@ -13,10 +13,22 @@ export const createResponse = async (
     url: options.url,
   };
 
-  const responseBody = body ?? responseOptions;
+  const getResponseBody = () => {
+    if (options?.status === 204) {
+      return null;
+    }
+
+    if (body) {
+      return JSON.stringify(body);
+    }
+
+    return JSON.stringify(responseOptions);
+  }
+
+  const responseBody = getResponseBody();
 
   try {
-    return new Response(JSON.stringify(responseBody), responseOptions);
+    return new Response(responseBody, responseOptions);
   } catch (error) {
     return responseOptions;
   }
