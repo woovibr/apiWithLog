@@ -4,8 +4,6 @@ import { getCurl } from './getCurl.ts';
 import { debugConsole } from './debugConsole.ts';
 import { ignoredHeaders } from './logSecurity.ts';
 
-const isDebug = ['true', 'api', '*'].includes(process.env.DEBUG);
-
 type ApiDebug = {
   init: string | URL | globalThis.Request;
   options: RequestInit;
@@ -20,6 +18,8 @@ export const apiDebug = ({
   getBody,
   response,
 }: ApiDebug) => {
+  const isDebug = ['true', 'api', '*'].includes(process.env.DEBUG);
+
   if (!isDebug) {
     return;
   }

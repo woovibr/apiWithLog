@@ -28,9 +28,9 @@ interface Debug {
   trace: Log;
 }
 export const getDebug = (name = '*'): Debug => {
-  const isEnabled = isLogEnabled(name);
-
   function log(...args) {
+    const isEnabled = isLogEnabled(name);
+
     if (!isEnabled) {
       return;
     }
@@ -42,6 +42,8 @@ export const getDebug = (name = '*'): Debug => {
   }
 
   function trace(...args) {
+    const isEnabled = isLogEnabled(name);
+
     if (!isEnabled) {
       return;
     }
@@ -53,6 +55,8 @@ export const getDebug = (name = '*'): Debug => {
   }
 
   function inspect() {
+    const isEnabled = isLogEnabled(name);
+
     if (!isEnabled) {
       return;
     }
