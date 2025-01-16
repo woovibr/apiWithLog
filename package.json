@@ -1,6 +1,6 @@
 {
   "name": "@woovi/apiwithlog",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "dependencies": {
     "chalk": "^5.4.1",
     "pretty-format": "^29.7.0",
