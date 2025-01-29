@@ -25,7 +25,7 @@ export const apiDebug = ({
   }
 
   // eslint-disable-next-line
-  const { agent, headers, ...optionsWithoutAgent } = options;
+  const { agent, dispatcher, headers, ...optionsWithoutAgent } = options;
 
   const cleanHeaders = Object.keys(headers || {}).reduce((acc, key) => {
     if (!headers || ignoredHeaders.includes(key)) {
@@ -50,6 +50,8 @@ export const apiDebug = ({
   debugConsole({
     time: `${durationTime}ms`,
     init,
+    agent: !!agent,
+    dispatcher: !!dispatcher,
     options: cleanOptions,
     // text,
     // json,
