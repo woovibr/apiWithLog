@@ -19,7 +19,7 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "useUnknownInCatchVariables": false,
-    "noEmit": false,
+    "noEmit": true,
     "emitDeclarationOnly": true,
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true

@@ -60,7 +60,7 @@ export const apiDebug = ({
     ...getBody(),
     ok: response.ok,
     status: response.status,
-    responseHeaders
+    responseHeaders,
     curl,
   });
 };
