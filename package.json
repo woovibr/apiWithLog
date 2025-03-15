@@ -29,7 +29,7 @@
     "lib"
   ],
   "homepage": "https://woovi.com/",
-  "packageManager": "pnpm@10.2.0",
+  "packageManager": "pnpm@10.6.3",
   "license": "MIT",
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
