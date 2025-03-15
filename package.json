@@ -4,6 +4,7 @@
   "dependencies": {
     "chalk": "^5.4.1",
     "pretty-format": "^29.7.0",
+    "vitest": "^3.0.8",
     "write-file-atomic": "^6.0.0"
   },
   "devDependencies": {
@@ -14,11 +15,13 @@
     "@sentry/node": "^9.5.0",
     "@types/node": "^22.13.10",
     "@types/write-file-atomic": "~4.0.3",
+    "domexception": "^4.0.0",
     "rollup": "^4.35.0",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-polyfill-node": "^0.13.0",
     "tslib": "^2.6.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vitest-fetch-mock": "^0.4.5"
   },
   "exports": {
     ".": {
