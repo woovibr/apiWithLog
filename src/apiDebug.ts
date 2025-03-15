@@ -43,6 +43,8 @@ export const apiDebug = ({
     headers: cleanHeaders,
   };
 
+  const responseHeaders = Object.fromEntries(response.headers.entries());
+
   const curl = getCurl(init, options);
   // eslint-disable-next-line
   console.log(chalk.yellow(options.method || 'GET'), chalk.blue(init));
@@ -58,6 +60,7 @@ export const apiDebug = ({
     ...getBody(),
     ok: response.ok,
     status: response.status,
+    responseHeaders
     curl,
   });
 };
