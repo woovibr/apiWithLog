@@ -4,7 +4,7 @@
   "dependencies": {
     "chalk": "^5.4.1",
     "pretty-format": "^29.7.0",
-    "vitest": "^3.0.8",
+    "vitest": "^3.1.1",
     "write-file-atomic": "^6.0.0"
   },
   "devDependencies": {
@@ -12,15 +12,15 @@
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.2",
-    "@sentry/node": "^9.5.0",
-    "@types/node": "^22.13.10",
+    "@sentry/node": "^9.11.0",
+    "@types/node": "^22.14.0",
     "@types/write-file-atomic": "~4.0.3",
     "domexception": "^4.0.0",
-    "rollup": "^4.35.0",
-    "rollup-plugin-dts": "^6.1.1",
+    "rollup": "^4.39.0",
+    "rollup-plugin-dts": "^6.2.1",
     "rollup-plugin-polyfill-node": "^0.13.0",
     "tslib": "^2.6.2",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "vitest-fetch-mock": "^0.4.5"
   },
   "exports": {
@@ -33,7 +33,7 @@
     "lib"
   ],
   "homepage": "https://woovi.com/",
-  "packageManager": "pnpm@10.6.3",
+  "packageManager": "pnpm@10.8.0",
   "license": "MIT",
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",

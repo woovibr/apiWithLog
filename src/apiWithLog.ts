@@ -60,7 +60,7 @@ export const apiWithLog = async (
 
     await saveRequestMock(init, options, text, response);
 
-    apiDebug({
+    await apiDebug({
       init,
       options,
       durationTime,
