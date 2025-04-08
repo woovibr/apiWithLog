@@ -1,4 +1,5 @@
-// find a b
+import zlib from 'node:zlib';
+
 export const ignoredHeaders = [
   'host',
   'method',
@@ -116,8 +117,57 @@ export const generateHeader = (options = {} as any) => {
  * @param {Object} body
  * @returns {string}
  */
-export function generateBody(body: string | object | null | undefined): string {
+export function generateBody(body: string | object | null | undefined, options: RequestInit): string {
   if (!body) return '';
+
+  if (options.headers) {
+    if (options.headers['Content-Encoding'] === 'gzip') {
+      if (Buffer.isBuffer(body)) {
+        try {
+          const result = zlib.gunzipSync(body);
+
+          if (options.headers['X-Woovi-Proxy'] === 'true') {
+            const parsed = JSON.parse(result.toString());
+
+            const resultBody = zlib.gunzipSync(Buffer.from(parsed.body));
+
+            const bodyParsed = {
+              ...parsed,
+              body: resultBody.toString(),
+            };
+
+            return ` --data-binary '${JSON.stringify(bodyParsed)}'`;
+          }
+
+          return ` --data-binary '${result.toString()}'`;
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      // parse string and gunzip body
+      try {
+        const parsed = JSON.parse(body);
+
+        let result;
+
+        if (parsed.body) {
+          if (parsed.body.type) {
+            try {
+              result = zlib.gunzipSync(parsed.body.data);
+            } catch (e) {
+              // ignore
+            }
+          }
+        }
+
+        if (result) {
+          return ` --data-binary '${result.toString()}'`;
+        }
+      } catch (e) {}
+    }
+  }
+
   if (typeof body === 'object') {
     if (body.hasOwnProperty('has')) {
       return ` --data-urlencode '${body.toString()}'`;
@@ -168,5 +218,5 @@ export const getCurl = (init: Request, requestInit: RequestInit) => {
 
   return `curl '${url}'${generateMethod(options)}${
     headers.params || ''
-  }${generateBody(body)}${generateCompress(headers.isEncode)}`;
+  }${generateBody(body, options)}${generateCompress(headers.isEncode)}`;
 };

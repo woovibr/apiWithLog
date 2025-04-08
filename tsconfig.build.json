@@ -24,5 +24,10 @@
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true
   },
+  "include": [
+    "src/*",
+    "scripts/*.ts",
+    "testutils/*"
+  ],
   "exclude": ["scripts/*"]
 }

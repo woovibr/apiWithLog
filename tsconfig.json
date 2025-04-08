@@ -21,5 +21,9 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": ["src/*", "scripts/*.ts"]
+  "include": [
+    "src/*",
+    "scripts/*.ts",
+    "testutils/*"
+  ]
 }
