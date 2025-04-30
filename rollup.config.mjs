@@ -41,7 +41,6 @@ export default [
       "node-fetch",
       "child_process",
       "domain",
-      '@sentry/node'
     ],
   },
   {
