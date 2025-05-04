@@ -10,7 +10,7 @@ export type DataResponseResult<TData, TError> =
   data: TError;
 };
 
-export const dataResponseResult = <TData, TError>(
+export const dataResponseResult = <TData, TError = TData>(
   data: TData | TError,
   response: globalThis.Response,
 ): DataResponseResult<TData, TError> => {
