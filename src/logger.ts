@@ -1,9 +1,9 @@
 /**
- * Sistema de logger configurável para a biblioteca apiWithLog
- * Permite substituir console.log por um logger customizado (ex: Pino) sem quebrar compatibilidade
+ * Customizable logger system for apiWithLog library
+ * Allows replacing console.log with a custom logger (e.g. Pino) without breaking compatibility
  */
 
-// Referência ao console global do Node.js
+// Reference to the global console of Node.js
 declare const console: {
   log: (...args: any[]) => void;
   error: (...args: any[]) => void;
@@ -22,7 +22,7 @@ export interface Logger {
   trace: (...args: any[]) => void;
 }
 
-// Logger padrão que usa console
+// Default logger that uses console
 const defaultLogger: Logger = {
   log: (...args: any[]) => console.log(...args),
   error: (...args: any[]) => console.error(...args),
@@ -32,68 +32,68 @@ const defaultLogger: Logger = {
   trace: (...args: any[]) => console.trace(...args),
 };
 
-// Logger global configurável
+// Global configurable logger
 let globalLogger: Logger = defaultLogger;
 
 /**
- * Configura um logger customizado para toda a biblioteca
- * @param logger - Logger customizado que implementa a interface Logger
+ * Configures a custom logger for the entire library
+ * @param logger - Custom logger that implements the Logger interface
  */
 export const setLogger = (logger: Logger): void => {
   globalLogger = logger;
 };
 
 /**
- * Reseta o logger para o padrão (console)
+ * Resets the logger to the default (console)
  */
 export const resetLogger = (): void => {
   globalLogger = defaultLogger;
 };
 
 /**
- * Obtém o logger atual
+ * Gets the current logger
  */
 export const getLogger = (): Logger => {
   return globalLogger;
 };
 
 /**
- * Função de log que usa o logger configurado
+ * Function to log with the configured logger
  */
 export const log = (...args: any[]): void => {
   globalLogger.log(...args);
 };
 
 /**
- * Função de erro que usa o logger configurado
+ * Function to log errors with the configured logger
  */
 export const error = (...args: any[]): void => {
   globalLogger.error(...args);
 };
 
 /**
- * Função de warning que usa o logger configurado
+ * Function to log warnings with the configured logger
  */
 export const warn = (...args: any[]): void => {
   globalLogger.warn(...args);
 };
 
 /**
- * Função de info que usa o logger configurado
+ * Function to log info with the configured logger
  */
 export const info = (...args: any[]): void => {
   globalLogger.info(...args);
 };
 
 /**
- * Função de debug que usa o logger configurado
+ * Function to log debug with the configured logger
  */
 export const debug = (...args: any[]): void => {
   globalLogger.debug(...args);
 };
 
 /**
- * Função de trace que usa o logger configurado
+ * Function to log trace with the configured logger
  */
 export const trace = (...args: any[]): void => {
   globalLogger.trace(...args);
