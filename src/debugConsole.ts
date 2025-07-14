@@ -1,9 +1,9 @@
 import util from 'util';
+import { log } from './logger.ts';
 // import prettyFormat from 'pretty-format';
 
 export const debugConsole = (obj: Record<string, unknown>) => {
-  // eslint-disable-next-line
-  console.log(
+  log(
     util.inspect(obj, {
       showHidden: false,
       depth: null,
@@ -12,5 +12,5 @@ export const debugConsole = (obj: Record<string, unknown>) => {
     }),
   );
   // eslint-disable-next-line
-  // console.log(prettyFormat(obj));
+  // log(prettyFormat(obj));
 };

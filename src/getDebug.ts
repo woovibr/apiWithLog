@@ -6,7 +6,14 @@
  * debug.inspect(obj); // api { obj }
  */
 import {debugConsole} from './debugConsole.ts';
+import { log as loggerLog, trace as loggerTrace } from './logger.ts';
 
+// Declaração do process global
+declare const process: {
+  env: {
+    DEBUG?: string;
+  };
+};
 
 const getDebugLogs = () => {
   const logs = process.env.DEBUG?.split(',') || [];
@@ -27,8 +34,9 @@ interface Debug {
   inspect: Log;
   trace: Log;
 }
+
 export const getDebug = (name = '*'): Debug => {
-  function log(...args) {
+  function log(...args: any[]) {
     const isEnabled = isLogEnabled(name);
 
     if (!isEnabled) {
@@ -37,11 +45,10 @@ export const getDebug = (name = '*'): Debug => {
 
     const logArgs = name !== '*' ? [`${name} `, ...args] : args;
 
-    // eslint-disable-next-line
-    console.log.apply(this, logArgs);
+    loggerLog(...logArgs);
   }
 
-  function trace(...args) {
+  function trace(...args: any[]) {
     const isEnabled = isLogEnabled(name);
 
     if (!isEnabled) {
@@ -50,21 +57,20 @@ export const getDebug = (name = '*'): Debug => {
 
     const logArgs = name !== '*' ? [`${name} `, ...args] : args;
 
-    // eslint-disable-next-line
-    console.trace.apply(this, logArgs);
+    loggerTrace(...logArgs);
   }
 
-  function inspect() {
+  function inspect(obj: Record<string, unknown>) {
     const isEnabled = isLogEnabled(name);
 
     if (!isEnabled) {
       return;
     }
 
-    debugConsole.apply(this, arguments);
+    debugConsole(obj);
   }
 
-  const debug = log;
+  const debug = log as Debug;
 
   debug.inspect = inspect;
   debug.trace = trace;

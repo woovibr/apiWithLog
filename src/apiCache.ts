@@ -6,6 +6,7 @@ import writeFileAtomicCallback from 'write-file-atomic';
 import { cloneResponse } from './cloneResponse.ts';
 import { debugConsole } from './debugConsole.ts';
 import { getCurl } from './getCurl.ts';
+import { log } from './logger.ts';
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
@@ -50,8 +51,7 @@ export const saveRequestMock = async (
       await writeFile(output, '');
     }
   } catch (err) {
-    // eslint-disable-next-line
-    console.log({ err });
+    log({ err });
   }
 
   try {
@@ -78,11 +78,9 @@ export const saveRequestMock = async (
 
     await writeFileAtomic(output, newMockString);
 
-    //eslint-disable-next-line
-    console.log(`saved to ${output}`);
+    log(`saved to ${output}`);
   } catch (err) {
-    // eslint-disable-next-line
-    console.log({ err });
+    log({ err });
   }
 };
 
@@ -115,8 +113,7 @@ export const getRequestMock = async (
 
     const { responseCopy } = await cloneResponse(response, text);
 
-    // eslint-disable-next-line
-    console.log('mock-cache: ', requestKey);
+    log(`mock-cache: ${requestKey}`);
 
     const isDebug = ['true', 'api', '*'].includes(process.env.DEBUG);
 
@@ -157,8 +154,7 @@ export const getRequestMock = async (
 
     return responseCopy;
   } catch (err) {
-    // eslint-disable-next-line
-    console.log({ err });
+    log({ err });
   }
 
   return null;
