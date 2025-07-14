@@ -5,6 +5,7 @@ import { debugConsole } from './debugConsole.ts';
 import { ignoredHeaders } from './logSecurity.ts';
 import zlib from 'node:zlib';
 import { sanitizeBody } from './sanitizeBody.ts';
+import { log } from './logger.ts';
 
 const getCleanBody = (options: RequestInit): { body?: string } => {
   if (!options.body) {
@@ -98,9 +99,7 @@ export const apiDebug = async ({
   const responseHeaders = Object.fromEntries(response.headers.entries());
 
   const curl = getCurl(init, options);
-  // eslint-disable-next-line
-  console.log(chalk.yellow(options.method || 'GET'), chalk.blue(init));
-  // eslint-disable-next-line
+  log(`${chalk.yellow(options.method || 'GET')} - ${chalk.blue(init.toString())}`);
   debugConsole({
     time: `${durationTime}ms`,
     init,
