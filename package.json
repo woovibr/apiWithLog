@@ -28,7 +28,7 @@
     ".": {
       "require": "./lib/index.cjs.js",
       "import": "./lib/index.esm.js",
-      "types": "./dist/index.d.ts"
+      "types": "./lib/index.d.ts"
     }
   },
   "files": [
