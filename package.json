@@ -18,14 +18,17 @@
     "rollup": "^4.39.0",
     "rollup-plugin-dts": "^6.2.1",
     "rollup-plugin-polyfill-node": "^0.13.0",
+    "@rslib/core": "^0.18.4",
     "tslib": "^2.6.2",
     "typescript": "^5.8.3",
+    "@typescript/native-preview": "^7.0.0-dev.20251212.1",
     "vitest-fetch-mock": "^0.4.5"
   },
   "exports": {
     ".": {
       "require": "./lib/index.cjs.js",
-      "import": "./lib/index.esm.js"
+      "import": "./lib/index.esm.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [
