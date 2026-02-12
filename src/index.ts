@@ -1,4 +1,5 @@
 export { apiWithLog } from "./apiWithLog"
+export { setOnResponseError, resetOnResponseError } from './apiReport.ts'
 export { dataResponse, dataResponseRemove, type DataResponse } from './dataResponse.ts';
 export { jsonOrText } from './jsonOrText.ts'
 export { dataResponseResult, type DataResponseResult } from './dataResponseResult.ts'
