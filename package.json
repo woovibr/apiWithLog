@@ -4,7 +4,6 @@
   "dependencies": {
     "chalk": "^5.4.1",
     "pretty-format": "^29.7.0",
-    "vitest": "^3.1.1",
     "write-file-atomic": "^6.0.0"
   },
   "devDependencies": {
@@ -22,6 +21,7 @@
     "tslib": "^2.6.2",
     "typescript": "^5.8.3",
     "@typescript/native-preview": "^7.0.0-dev.20251212.1",
+    "vitest": "^3.1.1",
     "vitest-fetch-mock": "^0.4.5"
   },
   "exports": {
