@@ -2,7 +2,7 @@ import chalk from 'chalk';
 
 import { getCurl } from './getCurl.ts';
 import { debugConsole } from './debugConsole.ts';
-import { ignoredHeaders } from './logSecurity.ts';
+import { isSkippedHeader, redactHeaderValue } from './sensitiveHeaders.ts';
 import zlib from 'node:zlib';
 import { sanitizeBody } from './sanitizeBody.ts';
 import { log } from './logger.ts';
@@ -56,6 +56,23 @@ const getCleanBody = (options: RequestInit): { body?: string } => {
   };
 };
 
+const getCleanHeaders = (headers: RequestInit['headers']): Record<string, string> => {
+  if (!headers) {
+    return {};
+  }
+
+  const entries: [string, string][] =
+    typeof Headers === 'function' && headers instanceof Headers
+      ? [...headers.entries()]
+      : Object.entries(headers as Record<string, string>);
+
+  return Object.fromEntries(
+    entries
+      .filter(([name]) => !isSkippedHeader(name))
+      .map(([name, value]) => [name, redactHeaderValue(name, value)]),
+  );
+};
+
 type ApiDebug = {
   init: string | URL | globalThis.Request;
   options: RequestInit;
@@ -79,16 +96,7 @@ export const apiDebug = async ({
   // eslint-disable-next-line
   const { agent, dispatcher, headers, ...optionsWithoutAgent } = options;
 
-  const cleanHeaders = Object.keys(headers || {}).reduce((acc, key) => {
-    if (!headers || ignoredHeaders.includes(key)) {
-      return acc;
-    }
-  
-    return {
-      ...acc,
-      [key]: (headers as Record<string, string>)[key],
-    };
-  }, {});
+  const cleanHeaders = getCleanHeaders(headers);
 
   const cleanOptions = {
     ...optionsWithoutAgent,
