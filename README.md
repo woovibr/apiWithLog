@@ -50,6 +50,22 @@ GET https://cat-fact.herokuapp.com/facts
 }
 ````
 
+### Credential redaction
+
+Credential headers are never printed in clear text, neither in the generated `curl` nor in the
+`DEBUG` output. The header is kept and its value is replaced with `[REDACTED]`, so the log still
+shows which authentication was sent:
+
+```
+curl 'https://api.example.com/v1/charge' -X POST -H "X-API-Key: [REDACTED]" -H "content-type: application/json"
+```
+
+Header names are compared case-insensitively. Redacted: `authorization`, `proxy-authorization`,
+`cookie`, `set-cookie`, `api-access-key`, `x-api-key`, `x-api-signature`, `x-woovi-authorization`,
+`x-hub-signature`, `x-hub-signature-256`, `x-pix-authentication-debug-token`, and any header whose
+name matches `/token|secret|signature|api[-_]?key|password/i`. The pseudo headers `host`, `method`,
+`path`, `scheme` and `version` are skipped. The list lives in `src/sensitiveHeaders.ts`.
+
 Save request to mock
 
 ```bash

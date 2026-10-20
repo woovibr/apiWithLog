@@ -1,14 +1,7 @@
 import zlib from 'node:zlib';
 
-export const ignoredHeaders = [
-  'host',
-  'method',
-  'path',
-  'scheme',
-  'version',
-  'Api-Access-Key',
-  'Authorization',
-];
+import { isSkippedHeader, redactHeaderValue } from './sensitiveHeaders.ts';
+
 
 /**
  * see https://fetch.spec.whatwg.org/#methods
@@ -63,7 +56,7 @@ const getHeaderString = (name: string, val: string) => {
     return '';
   }
 
-  return ` -H "${name}: ${val.replace(/(\\|")/g, '\\$1')}"`;
+  return ` -H "${name}: ${redactHeaderValue(name, val).replace(/(\\|")/g, '\\$1')}"`;
 };
 
 /**
@@ -80,7 +73,7 @@ export const generateHeader = (options = {} as any) => {
 
   if (isInstanceOfHeaders(headers)) {
     headers.forEach((val: string, name: string) => {
-      if (ignoredHeaders.indexOf(name) === -1) {
+      if (!isSkippedHeader(name)) {
         if (name.toLocaleLowerCase() !== 'content-length') {
           headerParam += getHeaderString(name, val);
         }
@@ -92,7 +85,7 @@ export const generateHeader = (options = {} as any) => {
     });
   } else if (headers) {
     Object.keys(headers)
-      .filter((name) => ignoredHeaders.indexOf(name) === -1)
+      .filter((name) => !isSkippedHeader(name))
       .map((name) => {
         if (name.toLocaleLowerCase() !== 'content-length') {
           headerParam += getHeaderString(name, headers[name]);
