@@ -14,9 +14,6 @@ importers:
       pretty-format:
         specifier: ^29.7.0
         version: 29.7.0
-      vitest:
-        specifier: ^3.1.1
-        version: 3.1.1(@types/node@22.14.0)(jiti@2.6.1)(terser@5.37.0)
       write-file-atomic:
         specifier: ^6.0.0
         version: 6.0.0
@@ -63,6 +60,9 @@ importers:
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
+      vitest:
+        specifier: ^3.1.1
+        version: 3.1.1(@types/node@22.14.0)(jiti@2.6.1)(terser@5.37.0)
       vitest-fetch-mock:
         specifier: ^0.4.5
         version: 0.4.5(vitest@3.1.1(@types/node@22.14.0)(jiti@2.6.1)(terser@5.37.0))
